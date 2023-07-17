@@ -8,8 +8,8 @@ pipeline {
             steps {
                 script {
                     echo "copying all neccessary files to ansible control node"
-                        sh "sudo su-"
                     sshagent(['ansible-key']) {
+                        sh "sudo su"
                         sh "scp -o StrictHostKeyChecking=no ansible/* root@${ANSIBLE_SERVER}:/root"
 
                         withCredentials([sshUserPrivateKey(credentialsId: 'ansible-key', keyFileVariable: 'keyfile', usernameVariable: 'ansible')]) {
