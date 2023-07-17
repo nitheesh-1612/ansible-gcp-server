@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        ANSIBLE_SERVER = "34.139.198.238"
+        ANSIBLE_SERVER = "52.91.167.174"
     }
     stages {
         stage("copy files to ansible server") {
@@ -9,7 +9,6 @@ pipeline {
                 script {
                     echo "copying all neccessary files to ansible control node"
                     sshagent(['ansible-key']) {
-                        sh "sudo su"
                         sh "scp -o StrictHostKeyChecking=no ansible/* root@${ANSIBLE_SERVER}:/root"
 
                         withCredentials([sshUserPrivateKey(credentialsId: 'ansible-key', keyFileVariable: 'keyfile', usernameVariable: 'ansible')]) {
