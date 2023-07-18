@@ -33,7 +33,7 @@ pipeline {
                         // sshScript remote: remote, script: "prepare-ansible-server.sh"
                         // echo "checking whether entered sudo or not"
                         // sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
-                        sh 'sudo ansible-playbook playbook.yaml
+                        sh 'sudo ansible-playbook playbook.yaml'
                     }
                 }
             }
