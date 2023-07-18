@@ -28,11 +28,12 @@ pipeline {
                     remote.allowAnyHosts = true
 
                     withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server', keyFileVariable: 'keyfile', usernameVariable: 'ansible')]){
-                        remote.user = ansible
-                        remote.identityFile = keyfile
+                        //remote.user = ansible
+                        //remote.identityFile = keyfile
                         // sshScript remote: remote, script: "prepare-ansible-server.sh"
-                        echo "checking whether entered sudo or not"
-                        sshCommand remote: remote, command: "sudo ansible-playbook playbook.yaml"
+                        // echo "checking whether entered sudo or not"
+                        // sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
+                        sh 'sudo ansible-playbook playbook.yaml
                     }
                 }
             }
