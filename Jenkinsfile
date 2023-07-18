@@ -28,7 +28,7 @@ pipeline {
                     remote.allowAnyHosts = true
 
                     withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server', keyFileVariable: 'keyfile', usernameVariable: 'ansible')]){
-                        remote.user = root
+                        remote.user = ansible
                         remote.identityFile = keyfile
                         // sshScript remote: remote, script: "prepare-ansible-server.sh"
                         sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
