@@ -32,7 +32,6 @@ pipeline {
                         remote.identityFile = keyfile
                         // sshScript remote: remote, script: "prepare-ansible-server.sh"
                         echo "checking whether entered sudo or not"
-                        sh "cd /root"
                         sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
                     }
                 }
