@@ -12,7 +12,7 @@ pipeline {
                         sh "scp -o StrictHostKeyChecking=no ansible/* root@${ANSIBLE_SERVER}:/home/ubuntu"
 
                         withCredentials([sshUserPrivateKey(credentialsId: 'ansible-client-server', keyFileVariable: 'keyfile', usernameVariable: 'ansible')]) {
-                            sh 'scp $keyfile root@$ANSIBLE_SERVER:/root/ssh-key.pem'
+                            sh 'scp $keyfile root@$ANSIBLE_SERVER:/home/ubuntu/ssh-key.pem'
                         }
                     }
                 }
@@ -31,7 +31,6 @@ pipeline {
                         remote.user = ansible
                         remote.identityFile = keyfile
                         // sshScript remote: remote, script: "prepare-ansible-server.sh"
-                        sh "sudo su"
                         echo "checking whether entered sudo or not"
                         sh "cd /root"
                         sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
