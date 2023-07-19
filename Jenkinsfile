@@ -35,12 +35,7 @@ pipeline {
             def sshCommand = "ssh -i ${env.SSH_KEY} ${remoteUser}@${remoteServer}"
             
             // Execute remote commands
-                sh "pwd"
-                sh "cd /var/lib/jenkins/workspace/pipeline"
-                sh "pwd"
-                sh "ls -l"
-                sshCommand remote: remote, command: "ls -l"
-                // sh "ansible-playbook playbook.yaml"
+                sh "ansible-playbook playbook.yaml"
             
             // Add more commands as needed
                                 }
