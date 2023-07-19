@@ -9,10 +9,10 @@ pipeline {
                 script {
                     echo "copying all neccessary files to ansible control node"
                     sshagent(['ansible-server']) {
-                        sh "scp -o StrictHostKeyChecking=no ansible/* ubuntu@${ANSIBLE_SERVER}:/"
+                        sh "scp -o StrictHostKeyChecking=no ansible/* root@${ANSIBLE_SERVER}:/"
 
                         withCredentials([sshUserPrivateKey(credentialsId: 'ansible-client-server', keyFileVariable: 'keyfile', usernameVariable: 'ansible')]) {
-                            sh 'scp $keyfile ubuntu@$ANSIBLE_SERVER:/ssh-key.pem'
+                            sh 'scp $keyfile root@$ANSIBLE_SERVER:/ssh-key.pem'
                         }
                     }
                 }
