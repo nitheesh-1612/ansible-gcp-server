@@ -9,10 +9,10 @@ pipeline {
                 script {
                     echo "copying all neccessary files to ansible control node"
                     sshagent(['ansible-server']) {
-                        sh "scp -o StrictHostKeyChecking=no ansible/* root@${ANSIBLE_SERVER}:/"
+                        sh "scp -o StrictHostKeyChecking=no ansible/* root@${ANSIBLE_SERVER}:/root"
 
                         withCredentials([sshUserPrivateKey(credentialsId: 'ansible-client-server', keyFileVariable: 'keyfile', usernameVariable: 'ansible')]) {
-                            sh 'scp $keyfile root@$ANSIBLE_SERVER:/ssh-key.pem'
+                            sh 'scp $keyfile root@$ANSIBLE_SERVER:/root/ssh-key.pem'
                         }
                     }
                 }
@@ -32,8 +32,8 @@ pipeline {
                         remote.identityFile = keyfile
                         // sshScript remote: remote, script: "prepare-ansible-server.sh"
                         echo "checking whether entered sudo or not"
-                        sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
-                        sh 'ansible-playbook playbook.yaml'
+                        sshCommand remote: remote, command: "ls -l"
+                        // sh 'ansible-playbook playbook.yaml'
                     }
                 }
             }
