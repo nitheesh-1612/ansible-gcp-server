@@ -31,7 +31,7 @@ pipeline {
             stage('Execute Remote Commands') {
             withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server', keyFileVariable: 'SSH_KEY')]) {
             def remoteServer = '34.73.99.65' // Replace with the IP or hostname of your remote server
-            def remoteUser = 'sudo' // Replace with the username of your remote server
+            def remoteUser = 'root' // Replace with the username of your remote server
             def sshCommand = "ssh -i ${env.SSH_KEY} ${remoteUser}@${remoteServer}"
             
             // Execute remote commands
