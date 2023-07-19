@@ -53,7 +53,7 @@ pipeline {
                     //     sshCommand remote: remote, command: "ls -l"
                     //     // sh 'ansible-playbook playbook.yaml'
                 //     }
-                // }
+                }
             }
         }
     }   
