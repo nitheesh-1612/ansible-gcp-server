@@ -34,7 +34,7 @@ pipeline {
                         echo "checking whether entered sudo or not"
                         sshCommand remote: remote, command: "ls -l"
                         // sh 'ansible-playbook playbook.yaml'
-                //     }
+                    }
                 }
             }
         }
