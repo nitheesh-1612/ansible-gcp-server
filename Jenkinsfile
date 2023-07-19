@@ -35,8 +35,8 @@ pipeline {
             def sshCommand = "ssh -i ${env.SSH_KEY} ${remoteUser}@${remoteServer}"
             
             // Execute remote commands
-                sh "cd .."
-                sh "cd pipeline"
+                sh "pwd"
+                sh "cd /var/lib/jenkins/workspace/pipeline"
                 sh "pwd"
                 sh "ls -l"
                 sshCommand remote: remote, command: "ls -l"
