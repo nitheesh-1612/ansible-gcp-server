@@ -35,6 +35,8 @@ pipeline {
             def sshCommand = "ssh -i ${env.SSH_KEY} ${remoteUser}@${remoteServer}"
             
             // Execute remote commands
+                sh "ssh -i ssh -i ${env.SSH_KEY} ${remoteUser}@${remoteServer}"
+                sh "pwd"
                 sh "ansible-playbook playbook.yaml"
             
             // Add more commands as needed
