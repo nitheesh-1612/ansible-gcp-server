@@ -37,7 +37,7 @@ pipeline {
             // Execute remote commands
                 // sh "cd /root"
                 sh "ls -l"
-                sh "ansible-playbook playbook.yaml"
+                // sh "ansible-playbook playbook.yaml"
             
             // Add more commands as needed
                                 }
