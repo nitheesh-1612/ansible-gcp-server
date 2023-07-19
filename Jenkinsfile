@@ -28,7 +28,7 @@ pipeline {
                     remote.allowAnyHosts = true
 
                     withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server', keyFileVariable: 'keyfile', usernameVariable: 'jenkins')]){
-                        remote.user = ansible
+                        remote.user = jenkins
                         remote.identityFile = keyfile
                         // sshScript remote: remote, script: "prepare-ansible-server.sh"
                         echo "checking whether entered sudo or not"
