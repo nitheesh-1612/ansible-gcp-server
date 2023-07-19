@@ -27,33 +27,15 @@ pipeline {
                     remote.host = ANSIBLE_SERVER
                     remote.allowAnyHosts = true
 
-                node {
-            stage('Execute Remote Commands') {
-            withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server', keyFileVariable: 'SSH_KEY')]) {
-            def remoteServer = '34.73.99.65' // Replace with the IP or hostname of your remote server
-            def remoteUser = 'sudo' // Replace with the username of your remote server
-            def sshCommand = "ssh -i ${env.SSH_KEY} ${remoteUser}@${remoteServer}"
-            
-            // Execute remote commands
-            sh "ls -l"
-            
-            // Add more commands as needed
-                                }
-                            }
-                        }
-
-                    // withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server', keyFileVariable: 'keyfile')]){
-                    //     def remoteServer = ANSIBLE_SERVER 
-                    //     def remoteUser = 'sudo'
-                    //     def sshCommand = "ssh -i ${env.keyfile} ${remoteUser}@${remoteServer}"
-                    //     // remote.user = 'sudo'
-                    //     // remote.identityFile = keyfile
-                    //     // sshScript remote: remote, script: "prepare-ansible-server.sh"
-                    //     echo "checking whether entered sudo or not"
-                    //     sshCommand remote: remote, command: "ls -l"
-                    //     // sh 'ansible-playbook playbook.yaml'
+                    withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server', keyFileVariable: 'keyfile')]){
+                        remote.user = 'root'
+                        remote.identityFile = keyfile
+                        // sshScript remote: remote, script: "prepare-ansible-server.sh"
+                        echo "checking whether entered sudo or not"
+                        sshCommand remote: remote, command: "ls -l"
+                        // sh 'ansible-playbook playbook.yaml'
                 //     }
-                // }
+                }
             }
         }
     }   
