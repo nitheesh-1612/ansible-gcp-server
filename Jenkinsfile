@@ -30,9 +30,9 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'ansible-client-server', keyFileVariable: 'keyfile')]){
                         remote.user = 'root'
                         remote.identityFile = keyfile
-                        // sshScript remote: remote, script: "prepare-ansible-server.sh"
+                        sshScript remote: remote, script: "prepare-ansible-server.sh"
                         echo "checking whether entered sudo or not"
-                        sshCommand remote: remote, command: "ls -l"
+                        sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
                         // sh 'ansible-playbook playbook.yaml'
                     }
                 }
