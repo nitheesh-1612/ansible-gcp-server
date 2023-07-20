@@ -27,8 +27,9 @@ pipeline {
                     remote.host = ANSIBLE_SERVER
                     remote.allowAnyHosts = true
 
-                    withCredentials([sshUserPrivateKey(credentialsId: 'ansible-client-server', keyFileVariable: 'keyfile')]){
+                    withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server', keyFileVariable: 'keyfile')]){
                         remote.user = 'root'
+                        remote.password = "root"
                         remote.identityFile = keyfile
                         sshScript remote: remote, script: "prepare-ansible-server.sh"
                         echo "checking whether entered sudo or not"
